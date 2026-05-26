@@ -63,7 +63,7 @@ const startServer = async () => {
 
     await connectMongo();
 
-    const certs = getCerts();
+    const certs = process.env.NODE_ENV !== 'production' ? getCerts() : null;
     const server = certs
       ? https.createServer(certs, app)
       : http.createServer(app);
