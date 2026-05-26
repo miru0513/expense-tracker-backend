@@ -10,6 +10,7 @@ const oauthRoutes  = require('./routes/oauthRoutes');
 const { extractUserFromRequest } = require('./middleware/authMiddleware');
 
 const app = express();
+app.set('trust proxy', 1);
 
 const FRONTEND_ORIGINS = (process.env.FRONTEND_URL || 'http://localhost:5173')
   .split(',')
