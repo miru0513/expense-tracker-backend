@@ -118,8 +118,8 @@ const deleteTrip = async (id) => {
 // ── Statistics ────────────────────────────────────────────────────────────────
 
 const getStatistics = async (tripId = null, userId = null) => {
-  let tripCondition = tripId !== null ? `tripId = '${tripId}'` : `tripId IS NULL`;
-  if (userId) tripCondition += ` AND userId = '${userId}'`;
+  let tripCondition = tripId !== null ? `"tripId" = '${tripId}'` : `"tripId" IS NULL`;
+  if (userId) tripCondition += ` AND "userId" = '${userId}'`;
 
   const [incomeRows]       = await sequelize.query(`SELECT COALESCE(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'income' AND ${tripCondition}`);
   const [expenseRows]      = await sequelize.query(`SELECT COALESCE(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition}`);
