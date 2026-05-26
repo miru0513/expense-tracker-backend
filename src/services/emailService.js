@@ -3,11 +3,18 @@ const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || 'https://script.google.co
 const sendEmail = async (to, subject, html) => {
   const res = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify({ to, subject, html }),
   });
-  const data = await res.json();
-  if (!data.success) throw new Error(data.error || 'Email sending failed');
+  const text = await res.text();
+  try {
+    const data = JSON.parse(text);
+    if (!data.success) throw new Error(data.error || 'Email sending failed');
+  } catch {
+    console.error('[Email] Apps Script response:', text.slice(0, 200));
+    throw new Error('Email service unavailable');
+  }
 };
 
 const sendPasswordResetEmail = async (email, resetLink) => {
