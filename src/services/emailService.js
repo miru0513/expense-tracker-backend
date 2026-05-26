@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzbY94CzxwlqHcYuZbFu15DiWXHGCz9c1P_1JViBkO35eHnBaYn6jXXEQN1ctBOfFGEPw/exec';
+const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzZv8Kljoz-N7s57GBAGe4uwWAGZeGp1KkEBeK4kx_54NXAjtPt5-PQ01Q8TpXmT_rjRg/exec';
 
 const sendEmail = async (to, subject, html) => {
   const res = await fetch(APPS_SCRIPT_URL, {
