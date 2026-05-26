@@ -5,12 +5,12 @@ const sendEmail = async (to, subject, html) => {
     method: 'POST',
     redirect: 'follow',
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ to, subject, html }),
+    body: JSON.stringify({ to, subject, htmlMessage: html }),
   });
   const text = await res.text();
   try {
     const data = JSON.parse(text);
-    if (!data.success) throw new Error(data.error || 'Email sending failed');
+    if (data.status !== 'success') throw new Error(data.error || 'Email sending failed');
   } catch {
     console.error('[Email] Apps Script response:', text.slice(0, 200));
     throw new Error('Email service unavailable');
