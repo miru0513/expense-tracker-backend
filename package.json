@@ -1,0 +1,57 @@
+{
+  "name": "expense-tracker-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/graphql/**/*.js",
+      "src/store/**/*.js",
+      "src/services/**/*.js",
+      "src/app.js"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@faker-js/faker": "^8.4.1",
+    "@graphql-tools/schema": "^10.0.32",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "graphql": "^16.13.2",
+    "graphql-http": "^1.22.4",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.1",
+    "mssql": "^12.5.0",
+    "nodemailer": "^8.0.7",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "selfsigned": "^5.5.0",
+    "sequelize": "^6.37.8",
+    "tedious": "^19.2.1",
+    "uuid": "^8.3.2",
+    "ws": "^8.20.0"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "sequelize-mock": "^0.10.2",
+    "supertest": "^7.2.2"
+  }
+}
