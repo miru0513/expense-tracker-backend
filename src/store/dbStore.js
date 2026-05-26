@@ -121,9 +121,9 @@ const getStatistics = async (tripId = null, userId = null) => {
   let tripCondition = tripId !== null ? `tripId = '${tripId}'` : `tripId IS NULL`;
   if (userId) tripCondition += ` AND userId = '${userId}'`;
 
-  const [incomeRows]       = await sequelize.query(`SELECT ISNULL(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'income' AND ${tripCondition}`);
-  const [expenseRows]      = await sequelize.query(`SELECT ISNULL(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition}`);
-  const [categoryRows]     = await sequelize.query(`SELECT category, ISNULL(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition} GROUP BY category`);
+  const [incomeRows]       = await sequelize.query(`SELECT COALESCE(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'income' AND ${tripCondition}`);
+  const [expenseRows]      = await sequelize.query(`SELECT COALESCE(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition}`);
+  const [categoryRows]     = await sequelize.query(`SELECT category, COALESCE(SUM(CAST(amount AS DECIMAL(10,2))), 0) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition} GROUP BY category`);
   const [countRows]        = await sequelize.query(`SELECT COUNT(*) AS total FROM transactions WHERE ${tripCondition}`);
   const [expenseCountRows] = await sequelize.query(`SELECT COUNT(*) AS total FROM transactions WHERE type = 'expense' AND ${tripCondition}`);
 
